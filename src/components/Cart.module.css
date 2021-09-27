@@ -1,0 +1,24 @@
+.heading {
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+.bottom {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+.bottom > p {
+    margin: 0;
+}
+.bottom > p > span {
+    font-weight: 500;
+}
+
+.cancel {
+    background-color: white;
+    color: brown;
+}
+.cancel:hover {
+    color: ivory;
+}

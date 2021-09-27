@@ -1,0 +1,16 @@
+.item {
+    margin: 15px auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+.item > h4 {
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+
+}
+.actions > p {
+    margin: 0;
+}

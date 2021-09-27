@@ -1,0 +1,11 @@
+.homepage {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 50px;
+}
+
+.image {
+    max-width: 200px;
+    margin: 40px;
+    opacity: 0.7;
+}
