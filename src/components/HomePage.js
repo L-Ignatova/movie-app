@@ -7,10 +7,17 @@ import { useState, useEffect } from 'react';
 const HomePage = (props) => {
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [hasError, setHasError] = useState(false);
 
     async function fetchMoviesHandler() {
-        const movies = await getMovieList();
-        setMovies(movies.filter(movie => movie !== null));
+        setIsLoading(true);
+        try {
+            const movies = await getMovieList();
+            setMovies(movies.filter(movie => movie !== null));
+        } catch (err) {
+            setHasError(true);
+        }
+        
         setIsLoading(false);
     }
     
@@ -18,10 +25,13 @@ const HomePage = (props) => {
         fetchMoviesHandler();
     }, []);
 
+    const isEmptyArray = isLoading === false && movies.length === 0;
+
     return (
         <div className={classes.homepage}>
+            {hasError && <p style={{color: "red"}}>Failed to get movies</p>}
             {isLoading && <p>Loading ...</p>}
-            {(isLoading === false && movies.length === 0) 
+            {(isEmptyArray && hasError === false) 
                 ? <div>
                     <img className={classes.image} src="../../assets/box.jpg" alt="emptyBox" />
                     <p>No movies in the store yet</p>
