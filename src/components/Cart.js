@@ -15,6 +15,14 @@ const Cart = (props) => {
             id={item.id} 
             key={item.id}
         />)
+    
+    const orderSubmitHandler = (ev) => {
+        ev.preventDefault();
+        console.log(`Ordering food for $${context.totalAmount.toFixed(2)} ...`);
+        for (const item of context.items) {
+            context.removeItem(item.id);
+        }
+    }
 
     return <Modal onClose={props.onClose}>
         <h2 className={classes.heading}>Your cart</h2>
@@ -25,7 +33,7 @@ const Cart = (props) => {
             <p>Total: <span>${context.totalAmount.toFixed(2)}</span></p>
             <div>
                 <button className={classes.cancel} onClick={props.onClose}>Cancel</button>
-                <button>Order</button>
+                <button onClick={orderSubmitHandler}>Order</button>
             </div>
             
         </div>
