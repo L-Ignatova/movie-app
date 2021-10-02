@@ -28,7 +28,7 @@ function App() {
         setIsLoading(true);
         try {
             const movies = await getMovieList();
-            const nonNullMovies = Object.values(movies).filter(movie => movie !== null);
+            const nonNullMovies = movies.filter(movie => movie !== null);
             setMovies(nonNullMovies);
         } catch (err) {
             setHasError(true);

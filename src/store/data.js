@@ -1,7 +1,9 @@
 
 export async function getMovieList() {
-    return fetch("https://movie-app-35590-default-rtdb.firebaseio.com/movies/.json")
-        .then(resp => resp.json());
+    const movieList = fetch("https://movie-app-35590-default-rtdb.firebaseio.com/movies/.json")
+        .then(resp => resp.json())
+        .then(data => Object.values(data));
+    return movieList;
 }
 
 export async function addMovie(movie) {
