@@ -7,23 +7,16 @@ import CartProvider from './store/cart-context';
 import AddMovieForm from './components/movies/AddMovieForm';
 import { getMovieList } from './store/data.js';
 
+import { useSelector } from 'react-redux';
+
 function App() {
-    const [cartIsShown, setCartIsShown] = useState(false);
-    const [addMovieFormIsShows, setAddMovieIsShown] = useState(false);
+    const cartIsVisible = useSelector(state => state.uiCart.cartIsVisible);
+    const addFormIsVisible = useSelector(state => state.uiAdd.addFormIsVisible);
 
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
     const [reload, setReload] = useState(false);
-
-    const toggleCartVisibilityHandler = () => {
-        setCartIsShown((prevState) => {
-            return !prevState;
-        });
-    }
-    const toggleAddFormVisibilityHandler = () => {
-        setAddMovieIsShown((prevState) => !prevState);
-    }
 
     const fetchMoviesHandler = async () => {
         setIsLoading(true);
@@ -44,14 +37,12 @@ function App() {
 
     return (
         <CartProvider className="App">
-            {cartIsShown && <Cart onClose={toggleCartVisibilityHandler}></Cart>}
-            {addMovieFormIsShows && <AddMovieForm 
+            {cartIsVisible && <Cart />}
+            {addFormIsVisible && <AddMovieForm 
                 onAddMovie={() => setReload(true)} 
-                onClose={toggleAddFormVisibilityHandler}
             />}
             <Header 
-                onShowCart={toggleCartVisibilityHandler} 
-                onShowAdd={toggleAddFormVisibilityHandler}/>
+            />
             <HomePage 
                 movies={movies}
                 isLoading={isLoading}
