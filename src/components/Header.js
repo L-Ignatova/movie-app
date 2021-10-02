@@ -12,9 +12,6 @@ const Header = (props) => {
         <header className={classes.header}>
             <ul className={classes.menu}>
                 <li>
-                    <button>Home</button>
-                </li>
-                <li>
                     <button onClick={props.onShowAdd}>Add movie</button>
                 </li>
                 <li className={classes.cart} onClick={props.onShowCart}>

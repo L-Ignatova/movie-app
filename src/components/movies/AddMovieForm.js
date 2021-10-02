@@ -12,10 +12,6 @@ const AddMovieForm = (props) => {
     const urlInputRef = useRef();
     const id = Math.random().toString();
 
-    const fetchMovies = () => {
-        props.onAddMovie();
-    }
-
     const submitHandler = (ev) => {
         ev.preventDefault();
         if (nameInputRef && yearInputRef && descriptionInputRef
@@ -30,7 +26,7 @@ const AddMovieForm = (props) => {
                 });
             }
         props.onClose();
-        fetchMovies();
+        props.onAddMovie();
     }
 
     return <Modal onClose={props.onClose}>

@@ -18,7 +18,7 @@ const Cart = (props) => {
     
     const orderSubmitHandler = (ev) => {
         ev.preventDefault();
-        console.log(`Ordering food for $${context.totalAmount.toFixed(2)} ...`);
+        console.log(`Ordering movies for $${context.totalAmount.toFixed(2)} ...`);
         for (const item of context.items) {
             context.removeItem(item.id);
         }

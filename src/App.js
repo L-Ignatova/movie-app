@@ -14,6 +14,7 @@ function App() {
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
+    const [reload, setReload] = useState(false);
 
     const toggleCartVisibilityHandler = () => {
         setCartIsShown((prevState) => {
@@ -24,7 +25,7 @@ function App() {
         setAddMovieIsShown((prevState) => !prevState);
     }
 
-    async function fetchMoviesHandler() {
+    const fetchMoviesHandler = async () => {
         setIsLoading(true);
         try {
             const movies = await getMovieList();
@@ -34,17 +35,18 @@ function App() {
             setHasError(true);
         }
         setIsLoading(false);
+        setReload(false);
     }
     
     useEffect(() => {
         fetchMoviesHandler();
-    }, []);
+    }, [reload]);
 
     return (
         <CartProvider className="App">
             {cartIsShown && <Cart onClose={toggleCartVisibilityHandler}></Cart>}
             {addMovieFormIsShows && <AddMovieForm 
-                onAddMovie={fetchMoviesHandler} 
+                onAddMovie={() => setReload(true)} 
                 onClose={toggleAddFormVisibilityHandler}
             />}
             <Header 
