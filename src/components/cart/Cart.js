@@ -1,17 +1,14 @@
 import Modal from '../Modal';
 import CartItem from './CartItem';
 import classes from './Cart.module.css';
-import { useContext } from 'react';
-import { useDispatch } from 'react-redux';
-import { CartContext } from '../../store/cart-context';
+import { useDispatch, useSelector } from 'react-redux';
 import { uiCartActions } from '../../store/ui-slice';
 
 const Cart = (props) => {
     const dispatch = useDispatch();
+    const cart = useSelector(state => state.cart);
 
-    const context = useContext(CartContext);
-
-    const items = context.items.map((item) => 
+    const items = cart.items.map((item) => 
         <CartItem 
             name={item.name} 
             price={item.price} 
@@ -22,9 +19,9 @@ const Cart = (props) => {
     
     const orderSubmitHandler = (ev) => {
         ev.preventDefault();
-        console.log(`Ordering movies for $${context.totalAmount.toFixed(2)} ...`);
-        for (const item of context.items) {
-            context.removeItem(item.id);
+        console.log(`Ordering movies for $${cart.totalAmount.toFixed(2)} ...`);
+        for (const item of cart.items) {
+            cart.removeItem(item.id);
         }
     }
 
@@ -38,7 +35,7 @@ const Cart = (props) => {
         {items.length === 0 ? <p>No items in your cart yet.</p> : items}
         <hr />
         <div className={classes.bottom}>
-            <p>Total: <span>${context.totalAmount.toFixed(2)}</span></p>
+            <p>Total: <span>${cart.totalAmount.toFixed(2)}</span></p>
             <div>
                 <button className={classes.cancel} onClick={toggle}>Cancel</button>
                 <button onClick={orderSubmitHandler}>Order</button>

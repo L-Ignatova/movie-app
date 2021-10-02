@@ -4,12 +4,13 @@ import classes from './Header.module.css';
 
 import { useDispatch } from 'react-redux';
 import { uiCartActions, uiAddFormActions } from '../store/ui-slice';
+import { useSelector } from 'react-redux';
 
 const Header = (props) => {
-    const context = useContext(CartContext);
-    const numberOfCartItems = context.items.reduce((acc, item) => {
-        return acc + item.quantity;
-    }, 0)
+    const cartItems = useSelector(state => state.cart.items)
+    const numberOfCartItems = cartItems.reduce((acc, item) => {
+            return acc + item.quantity;
+        }, 0)
 
     const dispatch = useDispatch();
     const toggleCart = () => {
