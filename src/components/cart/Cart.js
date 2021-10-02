@@ -3,6 +3,7 @@ import CartItem from './CartItem';
 import classes from './Cart.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCartActions } from '../../store/ui-slice';
+import cartActions from '../../store/cart-slice';
 
 const Cart = (props) => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Cart = (props) => {
         ev.preventDefault();
         console.log(`Ordering movies for $${cart.totalAmount.toFixed(2)} ...`);
         for (const item of cart.items) {
-            cart.removeItem(item.id);
+            dispatch(cartActions.removeItem(item.id));
         }
     }
 

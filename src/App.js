@@ -1,9 +1,8 @@
-import { useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import './App.css';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 import Cart from './components/cart/Cart';
-import CartProvider from './store/cart-context';
 import AddMovieForm from './components/movies/AddMovieForm';
 import { getMovieList } from './store/data.js';
 
@@ -36,7 +35,7 @@ function App() {
     }, [reload]);
 
     return (
-        <CartProvider className="App">
+        <div className="App">
             {cartIsVisible && <Cart />}
             {addFormIsVisible && <AddMovieForm 
                 onAddMovie={() => setReload(true)} 
@@ -48,7 +47,7 @@ function App() {
                 isLoading={isLoading}
                 hasError={hasError} 
             />
-        </CartProvider>
+        </div>
     );
 }
 

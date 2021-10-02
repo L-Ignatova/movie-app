@@ -1,12 +1,12 @@
-import { useContext } from 'react';
-import { CartContext } from '../../store/cart-context';
 import classes from './CartItem.module.css';
+import { useDispatch } from 'react-redux';
+import cartActions from '../../store/cart-slice';
 
 const CartItem = (props) => {
-    const context = useContext(CartContext);
+    const dispatch = useDispatch();
     
     const removeItemHandler = () => {
-        context.removeItem(props.id);
+        dispatch(cartActions.removeItem(props.id));
     }
 
     return <div className={classes.item}>

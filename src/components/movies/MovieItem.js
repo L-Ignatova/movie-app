@@ -5,9 +5,9 @@ import { useDispatch } from 'react-redux';
 import cartActions from '../../store/cart-slice';
 
 const MovieItem = (props) => {
+    const dispatch = useDispatch();
     const inputQuantityRef = useRef();
 
-    const dispatch = useDispatch();
     const addToCartHandler = (quantity) => {
         dispatch(cartActions.addItem({
             id: props.id,

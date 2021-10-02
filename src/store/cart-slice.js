@@ -20,8 +20,13 @@ export const cartSlice = createSlice({
             }
             state.totalAmount = updatedTotalAmount;
         },
-        removeItem(state, action) {
 
+        removeItem(state, action) {
+            const id = action.payload;
+            const currentItem = state.items.filter(item => item.id === id)[0];
+
+            state.totalAmount = state.totalAmount - currentItem.price * currentItem.quantity;
+            state.items = state.items.filter(item => item.id !== id);
         }
     },
 });
