@@ -1,5 +1,5 @@
-import { useContext } from 'react/cjs/react.development';
-import { CartContext } from '../store/cart-context';
+import { useContext } from 'react';
+import { CartContext } from '../../store/cart-context';
 import classes from './CartItem.module.css';
 
 const CartItem = (props) => {

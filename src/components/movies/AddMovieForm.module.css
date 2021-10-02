@@ -1,0 +1,25 @@
+.add-form, 
+.form-div {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 1.2em;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.cancel {
+    background-color: white;
+    color: brown;
+    text-shadow: none;
+}
+.cancel:hover {
+    color: ivory;
+}
+
+.actions {
+    padding: 20px 0px;
+}

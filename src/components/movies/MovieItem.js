@@ -1,5 +1,5 @@
-import { useContext, useRef } from 'react/cjs/react.development';
-import { CartContext } from '../store/cart-context';
+import { useContext, useRef } from 'react';
+import { CartContext } from '../../store/cart-context';
 import classes from './MovieItem.module.css';
 
 const MovieItem = (props) => {

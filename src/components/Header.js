@@ -12,10 +12,10 @@ const Header = (props) => {
         <header className={classes.header}>
             <ul className={classes.menu}>
                 <li>
-                    <a href="/">Home</a>
+                    <button>Home</button>
                 </li>
                 <li>
-                    <a href="/">Add movie</a>
+                    <button onClick={props.onShowAdd}>Add movie</button>
                 </li>
                 <li className={classes.cart} onClick={props.onShowCart}>
                     <div className={classes["shopping-cart"]}>

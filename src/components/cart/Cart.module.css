@@ -18,6 +18,7 @@
 .cancel {
     background-color: white;
     color: brown;
+    text-shadow: none;
 }
 .cancel:hover {
     color: ivory;
