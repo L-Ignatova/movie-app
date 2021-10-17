@@ -2,8 +2,6 @@ import classes from './HomePage.module.css';
 import MovieList from './movies/MovieList';
 
 const HomePage = (props) => {
-    
-
     const isEmptyArray = props.isLoading === false && props.movies.length === 0;
 
     return (
