@@ -1,6 +1,6 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import Header from './components/Header';
+import Header from './components/Header.tsx';
 import HomePage from './components/HomePage';
 import Cart from './components/cart/Cart.tsx';
 import AddMovieForm from './components/movies/AddMovieForm';
@@ -29,7 +29,7 @@ function App() {
         setIsLoading(false);
         setReload(false);
     }
-    
+
     useEffect(() => {
         fetchMoviesHandler();
     }, [reload]);
@@ -37,15 +37,14 @@ function App() {
     return (
         <div className="App">
             {cartIsVisible && <Cart />}
-            {addFormIsVisible && <AddMovieForm 
-                onAddMovie={() => setReload(true)} 
+            {addFormIsVisible && <AddMovieForm
+                onAddMovie={() => setReload(true)}
             />}
-            <Header 
-            />
-            <HomePage 
+            <Header />
+            <HomePage
                 movies={movies}
                 isLoading={isLoading}
-                hasError={hasError} 
+                hasError={hasError}
             />
         </div>
     );
