@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header.tsx';
 import HomePage from './components/HomePage.tsx';
 import Cart from './components/cart/Cart.tsx';
-import AddMovieForm from './components/movies/AddMovieForm';
+import AddMovieForm from './components/movies/AddMovieForm.tsx';
 import { getMovieList } from './store/data.ts';
 
 import { useSelector } from 'react-redux';
