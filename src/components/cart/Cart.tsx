@@ -7,6 +7,7 @@ import { uiCartActions } from '../../store/ui-slice';
 import cartActions from '../../store/cart-slice';
 import { useAppDispatch } from '../../store/index';
 import type { RootState } from '../../store/index'
+import React from 'react';
 
 const Cart: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ const Cart: React.FC = () => {
             key={item.id}
         />)
     
-    const orderSubmitHandler = (ev) => {
+    const orderSubmitHandler = (ev: React.SyntheticEvent) => {
         ev.preventDefault();
         console.log(`Ordering movies for $${cart.totalAmount.toFixed(2)} ...`);
         for (const item of cart.items) {

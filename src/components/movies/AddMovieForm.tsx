@@ -23,17 +23,17 @@ const AddMovieForm: React.FC<IProps> = ({onAddMovie, ...props}) => {
     const urlInputRef = useRef<HTMLInputElement>(null);
     const id = Math.random().toString();
 
-    const submitHandler = (ev) => {
+    const submitHandler = (ev: React.SyntheticEvent) => {
         ev.preventDefault();
         if (nameInputRef && yearInputRef && descriptionInputRef
             && priceInputRef && urlInputRef) {
                 addMovie({
-                    name: nameInputRef.current?.value, 
+                    name: nameInputRef.current?.value || "", 
                     id: id, 
-                    description: descriptionInputRef.current?.value, 
-                    imageUrl: urlInputRef.current?.value, 
-                    year: yearInputRef.current?.value, 
-                    price: priceInputRef.current?.value,
+                    description: descriptionInputRef.current?.value || "", 
+                    imageUrl: urlInputRef.current?.value.toString() || "", 
+                    yearOfRelease: Number(yearInputRef.current?.value), 
+                    price: Number(priceInputRef.current?.value),
                 });
             }
         toggleCart();
@@ -68,7 +68,6 @@ const AddMovieForm: React.FC<IProps> = ({onAddMovie, ...props}) => {
                 <button className={classes.cancel} type="button" onClick={toggleCart}>Cancel</button>
                 <button onClick={submitHandler} type="submit">Add movie</button>
             </section>
-            
         </form>
     </Modal>;
 };
