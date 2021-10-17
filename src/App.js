@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header.tsx';
-import HomePage from './components/HomePage';
+import HomePage from './components/HomePage.tsx';
 import Cart from './components/cart/Cart.tsx';
 import AddMovieForm from './components/movies/AddMovieForm';
 import { getMovieList } from './store/data.ts';

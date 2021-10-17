@@ -29,7 +29,7 @@ const Cart: React.FC = () => {
         }
     }
 
-    const toggle = () => {
+    const toggle = (ev: React.MouseEvent): void => {
         dispatch(uiCartActions.toggle());
     }
 

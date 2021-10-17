@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import { addMovie } from "../../store/data.ts";
-import Modal from "../Modal";
+import Modal from "../Modal.tsx";
 
 import classes from "./AddMovieForm.module.css";
 import { useDispatch } from "react-redux";
