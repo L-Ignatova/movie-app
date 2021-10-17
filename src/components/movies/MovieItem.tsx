@@ -4,7 +4,7 @@ import classes from './MovieItem.module.css';
 import { useAppDispatch } from '../../store';
 import cartActions from '../../store/cart-slice';
 
-interface IProps {
+type IProps = {
     id: string; 
     key: string;
     year: number;
