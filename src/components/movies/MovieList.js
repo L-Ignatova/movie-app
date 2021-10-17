@@ -1,5 +1,5 @@
 import classes from './MovieList.module.css';
-import MovieItem from './MovieItem';
+import MovieItem from './MovieItem.tsx';
 
 const MovieList = (props) => {
     return <ul className={classes.list}>
