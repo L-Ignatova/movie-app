@@ -1,9 +1,17 @@
 import classes from './CartItem.module.css';
-import { useDispatch } from 'react-redux';
-import cartActions from '../../store/cart-slice.ts';
+import cartActions from '../../store/cart-slice';
+import { useAppDispatch } from '../../store';
 
-const CartItem = (props) => {
-    const dispatch = useDispatch();
+interface IProps {
+    id: string; 
+    key: string;
+    name: string;
+    quantity: number;
+    price: number;
+}
+
+const CartItem: React.FC<IProps> = (props) => {
+    const dispatch = useAppDispatch();
     
     const removeItemHandler = () => {
         dispatch(cartActions.removeItem(props.id));

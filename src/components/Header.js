@@ -27,7 +27,7 @@ const Header = () => {
                 </li>
                 <li className={classes.cart} onClick={toggleCart}>
                     <div className={classes["shopping-cart"]}>
-                       <i class="fas fa-shopping-cart"></i>
+                       <i className="fas fa-shopping-cart"></i>
                         <p>{numberOfCartItems}</p> 
                     </div>
                     

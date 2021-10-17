@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 import { cartSlice } from "./cart-slice";
 import { uiAddFormSlice, uiCartSlice } from "./ui-slice";
 
@@ -10,7 +11,8 @@ const store = configureStore({
     }
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+type AppDispatch = typeof store.dispatch;
 
+export type RootState = ReturnType<typeof store.getState>;
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 export default store;
