@@ -2,12 +2,13 @@ import Modal from '../Modal';
 import CartItem from './CartItem';
 import classes from './Cart.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { uiCartActions } from '../../store/ui-slice.ts';
-import cartActions from '../../store/cart-slice.ts';
+import { uiCartActions } from '../../store/ui-slice';
+import cartActions from '../../store/cart-slice';
+import type { RootState, AppDispatch } from '../../store/index'
 
-const Cart = (props) => {
-    const dispatch = useDispatch();
-    const cart = useSelector(state => state.cart);
+const Cart = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const cart = useSelector((state: RootState) => state.cart);
 
     const items = cart.items.map((item) => 
         <CartItem 
