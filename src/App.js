@@ -2,9 +2,9 @@ import React, { useState, useEffect} from 'react';
 import './App.css';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
-import Cart from './components/cart/Cart';
+import Cart from './components/cart/Cart.tsx';
 import AddMovieForm from './components/movies/AddMovieForm';
-import { getMovieList, Movie } from './store/data.ts';
+import { getMovieList } from './store/data.ts';
 
 import { useSelector } from 'react-redux';
 
