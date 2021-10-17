@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import classes from './MovieItem.module.css';
 
 import { useDispatch } from 'react-redux';
-import cartActions from '../../store/cart-slice';
+import cartActions from '../../store/cart-slice.ts';
 
 const MovieItem = (props) => {
     const dispatch = useDispatch();

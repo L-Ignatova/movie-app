@@ -2,10 +2,10 @@ import React from 'react';
 import classes from './Header.module.css';
 
 import { useDispatch } from 'react-redux';
-import { uiCartActions, uiAddFormActions } from '../store/ui-slice';
+import { uiCartActions, uiAddFormActions } from '../store/ui-slice.ts';
 import { useSelector } from 'react-redux';
 
-const Header = (props) => {
+const Header = () => {
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.items)
     const numberOfCartItems = cartItems.reduce((acc, item) => {

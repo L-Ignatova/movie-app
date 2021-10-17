@@ -4,7 +4,7 @@ import Header from './components/Header';
 import HomePage from './components/HomePage';
 import Cart from './components/cart/Cart';
 import AddMovieForm from './components/movies/AddMovieForm';
-import { getMovieList } from './store/data.js';
+import { getMovieList, Movie } from './store/data.ts';
 
 import { useSelector } from 'react-redux';
 

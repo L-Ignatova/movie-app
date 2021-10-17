@@ -1,10 +1,10 @@
 import React, {useRef} from "react";
-import { addMovie } from "../../store/data";
+import { addMovie } from "../../store/data.ts";
 import Modal from "../Modal";
 
 import classes from "./AddMovieForm.module.css";
 import { useDispatch } from "react-redux";
-import { uiAddFormActions } from "../../store/ui-slice";
+import { uiAddFormActions } from "../../store/ui-slice.ts";
 
 const AddMovieForm = (props) => {
     const dispatch = useDispatch();
