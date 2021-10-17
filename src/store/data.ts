@@ -1,7 +1,15 @@
+export interface Movie {
+    description: string;
+    id: number;
+    imageUrl: string;
+    name: string;
+    price: number;
+    yearOfRelease: number;
+}
 
-export async function getMovieList() {
+export async function getMovieList<T>(): Promise<T[]>{
     const movieList = fetch("https://movie-app-35590-default-rtdb.firebaseio.com/movies/.json")
-        .then(resp => resp.json())
+        .then(resp => resp.json() as Promise<{ data: T }>)
         .then(data => Object.values(data));
     return movieList;
 }
