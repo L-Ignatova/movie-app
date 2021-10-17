@@ -1,6 +1,6 @@
 import { Movie } from '../store/data';
 import classes from './HomePage.module.css';
-import MovieList from './movies/MovieList.js';
+import MovieList from './movies/MovieList';
 
 interface IProps {
     movies: Movie[]; 

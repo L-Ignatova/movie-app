@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Header from './components/Header.tsx';
-import HomePage from './components/HomePage.tsx';
-import Cart from './components/cart/Cart.tsx';
-import AddMovieForm from './components/movies/AddMovieForm.tsx';
-import { getMovieList } from './store/data.ts';
-
+import Header from './components/Header';
+import HomePage from './components/HomePage';
+import Cart from './components/cart/Cart';
+import AddMovieForm from './components/movies/AddMovieForm';
+import { getMovieList, Movie } from './store/data';
+import { RootState } from './store';
 import { useSelector } from 'react-redux';
 
 function App() {
-    const cartIsVisible = useSelector(state => state.uiCart.cartIsVisible);
-    const addFormIsVisible = useSelector(state => state.uiAdd.addFormIsVisible);
+    const cartIsVisible = useSelector((state: RootState) => state.uiCart.cartIsVisible);
+    const addFormIsVisible = useSelector((state: RootState) => state.uiAdd.addFormIsVisible);
 
-    const [movies, setMovies] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [hasError, setHasError] = useState(false);
-    const [reload, setReload] = useState(false);
+    const [movies, setMovies] = useState<Movie[] | []>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [hasError, setHasError] = useState<boolean>(false);
+    const [reload, setReload] = useState<boolean>(false);
 
     const fetchMoviesHandler = async () => {
         setIsLoading(true);
         try {
-            const movies = await getMovieList();
-            const nonNullMovies = movies.filter(movie => movie !== null);
+            const movies: Movie[] = await getMovieList();
+            const nonNullMovies = movies.filter((movie: Movie) => movie !== null);
             setMovies(nonNullMovies);
         } catch (err) {
             setHasError(true);
