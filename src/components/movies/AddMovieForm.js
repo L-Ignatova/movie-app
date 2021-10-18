@@ -3,8 +3,15 @@ import { addMovie } from "../../store/data";
 import Modal from "../Modal";
 
 import classes from "./AddMovieForm.module.css";
+import { useDispatch } from "react-redux";
+import { uiAddFormActions } from "../../store/ui-slice";
 
 const AddMovieForm = (props) => {
+    const dispatch = useDispatch();
+    const toggleCart = () => {
+        dispatch(uiAddFormActions.toggle())
+    }
+
     const nameInputRef = useRef();
     const yearInputRef = useRef();
     const descriptionInputRef = useRef();
@@ -25,11 +32,11 @@ const AddMovieForm = (props) => {
                     price: priceInputRef.current.value,
                 });
             }
-        props.onClose();
+        toggleCart();
         props.onAddMovie();
     }
 
-    return <Modal onClose={props.onClose}>
+    return <Modal onClose={toggleCart}>
         <h4 className={classes.title}>Add form</h4>
         <form className={classes["add-form"]}>
             <div className={classes["form-div"]}>
@@ -54,7 +61,7 @@ const AddMovieForm = (props) => {
                 <input ref={urlInputRef} id="url" type="text" />
             </div>
             <section className={classes.actions}>
-                <button className={classes.cancel} type="button" onClick={props.onClose}>Cancel</button>
+                <button className={classes.cancel} type="button" onClick={toggleCart}>Cancel</button>
                 <button onClick={submitHandler} type="submit">Add movie</button>
             </section>
             

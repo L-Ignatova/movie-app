@@ -1,13 +1,15 @@
 import Modal from '../Modal';
 import CartItem from './CartItem';
 import classes from './Cart.module.css';
-import { useContext } from 'react';
-import { CartContext } from '../../store/cart-context';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiCartActions } from '../../store/ui-slice';
+import cartActions from '../../store/cart-slice';
 
 const Cart = (props) => {
-    const context = useContext(CartContext);
+    const dispatch = useDispatch();
+    const cart = useSelector(state => state.cart);
 
-    const items = context.items.map((item) => 
+    const items = cart.items.map((item) => 
         <CartItem 
             name={item.name} 
             price={item.price} 
@@ -18,21 +20,25 @@ const Cart = (props) => {
     
     const orderSubmitHandler = (ev) => {
         ev.preventDefault();
-        console.log(`Ordering movies for $${context.totalAmount.toFixed(2)} ...`);
-        for (const item of context.items) {
-            context.removeItem(item.id);
+        console.log(`Ordering movies for $${cart.totalAmount.toFixed(2)} ...`);
+        for (const item of cart.items) {
+            dispatch(cartActions.removeItem(item.id));
         }
     }
 
-    return <Modal onClose={props.onClose}>
+    const toggle = () => {
+        dispatch(uiCartActions.toggle());
+    }
+
+    return <Modal onClose={toggle}>
         <h2 className={classes.heading}>Your cart</h2>
 
         {items.length === 0 ? <p>No items in your cart yet.</p> : items}
         <hr />
         <div className={classes.bottom}>
-            <p>Total: <span>${context.totalAmount.toFixed(2)}</span></p>
+            <p>Total: <span>${cart.totalAmount.toFixed(2)}</span></p>
             <div>
-                <button className={classes.cancel} onClick={props.onClose}>Cancel</button>
+                <button className={classes.cancel} onClick={toggle}>Cancel</button>
                 <button onClick={orderSubmitHandler}>Order</button>
             </div>
             

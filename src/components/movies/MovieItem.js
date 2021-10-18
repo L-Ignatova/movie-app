@@ -1,24 +1,27 @@
-import { useContext, useRef } from 'react';
-import { CartContext } from '../../store/cart-context';
+import { useRef } from 'react';
 import classes from './MovieItem.module.css';
 
+import { useDispatch } from 'react-redux';
+import cartActions from '../../store/cart-slice';
+
 const MovieItem = (props) => {
+    const dispatch = useDispatch();
     const inputQuantityRef = useRef();
-    const context = useContext(CartContext);
-    const addMovieHandler = (quantity) => {
-        context.addItem({
+
+    const addToCartHandler = (quantity) => {
+        dispatch(cartActions.addItem({
             id: props.id,
             name: props.name,
             quantity: quantity,
             price: props.price,
-        });
+        }))
     }
     
     const submitHandler = (ev) => {
         ev.preventDefault();
         const movieQuantity = inputQuantityRef.current.value;
         const enteredMovieQuantity = +movieQuantity;
-        addMovieHandler(enteredMovieQuantity);
+        addToCartHandler(enteredMovieQuantity);
     }
     
     return <div className={classes["movie-item"]}>
