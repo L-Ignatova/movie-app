@@ -12,6 +12,7 @@ Small app to practice ReactJS - components, state management, styling, redux, ty
 Started out with react context api in **main**, then started working on two branches:
 * the **[switch-to-redux](https://github.com/L-Ignatova/movie-app/tree/switch-to-redux)** branch goes through the process of switching from Context API to Redux & Redux Toolkit
 * the **[switch-to-ts](https://github.com/L-Ignatova/movie-app/tree/switch-to-ts)** branch was made when migrating the app from JavaScript to TypeScript :sparkles:
+
 Both are now merged but can be found in the closed pull requests.
 
 ### TBC with:
