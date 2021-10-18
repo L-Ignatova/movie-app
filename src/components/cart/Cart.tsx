@@ -1,13 +1,17 @@
 import Modal from '../Modal';
 import CartItem from './CartItem';
 import classes from './Cart.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 import { uiCartActions } from '../../store/ui-slice';
 import cartActions from '../../store/cart-slice';
+import { useAppDispatch } from '../../store/index';
+import type { RootState } from '../../store/index'
+import React from 'react';
 
-const Cart = (props) => {
-    const dispatch = useDispatch();
-    const cart = useSelector(state => state.cart);
+const Cart: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const cart = useSelector((state: RootState) => state.cart);
 
     const items = cart.items.map((item) => 
         <CartItem 
@@ -18,7 +22,7 @@ const Cart = (props) => {
             key={item.id}
         />)
     
-    const orderSubmitHandler = (ev) => {
+    const orderSubmitHandler = (ev: React.SyntheticEvent) => {
         ev.preventDefault();
         console.log(`Ordering movies for $${cart.totalAmount.toFixed(2)} ...`);
         for (const item of cart.items) {
@@ -26,7 +30,7 @@ const Cart = (props) => {
         }
     }
 
-    const toggle = () => {
+    const toggle = (ev: React.MouseEvent): void => {
         dispatch(uiCartActions.toggle());
     }
 

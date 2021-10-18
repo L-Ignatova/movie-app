@@ -1,14 +1,24 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import classes from './MovieItem.module.css';
 
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../store';
 import cartActions from '../../store/cart-slice';
 
-const MovieItem = (props) => {
-    const dispatch = useDispatch();
-    const inputQuantityRef = useRef();
+type IProps = {
+    id: string; 
+    key: string;
+    year: number;
+    description: string;
+    url: string;
+    name: string;
+    price: number;
+}
 
-    const addToCartHandler = (quantity) => {
+const MovieItem: React.FC<IProps> = ({children, ...props}) => {
+    const dispatch = useAppDispatch();
+    const inputQuantityRef = useRef<HTMLInputElement>(null);
+
+    const addToCartHandler = (quantity:number) => {
         dispatch(cartActions.addItem({
             id: props.id,
             name: props.name,
@@ -17,9 +27,9 @@ const MovieItem = (props) => {
         }))
     }
     
-    const submitHandler = (ev) => {
+    const submitHandler = (ev: React.SyntheticEvent) => {
         ev.preventDefault();
-        const movieQuantity = inputQuantityRef.current.value;
+        const movieQuantity = inputQuantityRef.current?.value || 0;
         const enteredMovieQuantity = +movieQuantity;
         addToCartHandler(enteredMovieQuantity);
     }

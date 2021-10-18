@@ -3,37 +3,41 @@ import { addMovie } from "../../store/data";
 import Modal from "../Modal";
 
 import classes from "./AddMovieForm.module.css";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../store";
 import { uiAddFormActions } from "../../store/ui-slice";
 
-const AddMovieForm = (props) => {
-    const dispatch = useDispatch();
+type IProps = {
+    onAddMovie: () => void;
+}
+
+const AddMovieForm: React.FC<IProps> = ({onAddMovie, ...props}) => {
+    const dispatch = useAppDispatch();
     const toggleCart = () => {
         dispatch(uiAddFormActions.toggle())
     }
 
-    const nameInputRef = useRef();
-    const yearInputRef = useRef();
-    const descriptionInputRef = useRef();
-    const priceInputRef = useRef();
-    const urlInputRef = useRef();
+    const nameInputRef = useRef<HTMLInputElement>(null);
+    const yearInputRef = useRef<HTMLInputElement>(null);
+    const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
+    const priceInputRef = useRef<HTMLInputElement>(null);
+    const urlInputRef = useRef<HTMLInputElement>(null);
     const id = Math.random().toString();
 
-    const submitHandler = (ev) => {
+    const submitHandler = (ev: React.SyntheticEvent) => {
         ev.preventDefault();
         if (nameInputRef && yearInputRef && descriptionInputRef
             && priceInputRef && urlInputRef) {
                 addMovie({
-                    name: nameInputRef.current.value, 
+                    name: nameInputRef.current?.value || "", 
                     id: id, 
-                    description: descriptionInputRef.current.value, 
-                    imageUrl: urlInputRef.current.value, 
-                    year: yearInputRef.current.value, 
-                    price: priceInputRef.current.value,
+                    description: descriptionInputRef.current?.value || "", 
+                    imageUrl: urlInputRef.current?.value.toString() || "", 
+                    yearOfRelease: Number(yearInputRef.current?.value), 
+                    price: Number(priceInputRef.current?.value),
                 });
             }
         toggleCart();
-        props.onAddMovie();
+        onAddMovie();
     }
 
     return <Modal onClose={toggleCart}>
@@ -45,7 +49,7 @@ const AddMovieForm = (props) => {
             </div>
             <div className={classes["form-div"]}>
                 <label htmlFor="year">Year of release</label>
-                <input ref={yearInputRef} id="year" type="number" min="1900" max={new Date().getYear().toString()} step="1"/>
+                <input ref={yearInputRef} id="year" type="number" min="1900" max={new Date().getFullYear().toString()} step="1"/>
             </div>
             <div className={classes["form-div"]}>
                 <label htmlFor="description">Movie description</label>
@@ -64,7 +68,6 @@ const AddMovieForm = (props) => {
                 <button className={classes.cancel} type="button" onClick={toggleCart}>Cancel</button>
                 <button onClick={submitHandler} type="submit">Add movie</button>
             </section>
-            
         </form>
     </Modal>;
 };
