@@ -20,7 +20,7 @@ function App() {
     const fetchMoviesHandler = async () => {
         setIsLoading(true);
         try {
-            const movies: Movie[] = await getMovieList();
+            const movies = await getMovieList();
             const nonNullMovies = movies.filter((movie: Movie) => movie !== null);
             setMovies(nonNullMovies);
         } catch (err) {

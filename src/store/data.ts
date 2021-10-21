@@ -6,16 +6,29 @@ export interface Movie {
     price: number;
     yearOfRelease: number;
 }
+type Common = {
+    baseUrl: string;
+    headers: HeadersInit;
+}
 
-export async function getMovieList<T>(): Promise<T[]>{
-    const movieList = fetch("https://movie-app-35590-default-rtdb.firebaseio.com/movies/.json")
-        .then(resp => resp.json() as Promise<{ data: T }>)
-        .then(data => Object.values(data));
-    return movieList;
+const common: Common = {
+    baseUrl: "https://movie-app-35590-default-rtdb.firebaseio.com",
+    headers: {'Content-Type': "application/json"},
+}
+
+export async function getMovieList() {
+    const movies = await getRequest<Movie>("movies");
+    return movies;
+}
+
+function getRequest<T>(endpoint: string): Promise<T[]>{
+    return fetch(`${common.baseUrl}/${endpoint}/.json`)
+        .then(resp => resp.json())
+        .then(data => Object.values(data) as T[]);
 }
 
 export async function addMovie<T>(movie: Movie): Promise<T> {
-    const data = await fetch("https://movie-app-35590-default-rtdb.firebaseio.com/movies.json", {
+    const data = await fetch(`${common.baseUrl}/movies.json`, {
         method: "POST",
         body: JSON.stringify({
             name: movie.name, 
@@ -25,7 +38,9 @@ export async function addMovie<T>(movie: Movie): Promise<T> {
             yearOfRelease: movie.yearOfRelease, 
             price: movie.price
         }),
-        headers: {'Content-Type': "application/json"}
-    }).then(resp => resp.json()).then(data => data);
+        headers: common.headers
+    })
+    .then(resp => resp.json())
+    .then(data => data);
     return data;
 }
