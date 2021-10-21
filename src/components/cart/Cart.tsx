@@ -28,6 +28,7 @@ const Cart: React.FC = () => {
         for (const item of cart.items) {
             dispatch(cartActions.removeItem(item.id));
         }
+        dispatch(uiCartActions.toggle());
     }
 
     const toggle = (ev: React.MouseEvent): void => {
